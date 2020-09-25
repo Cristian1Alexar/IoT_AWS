@@ -1,5 +1,6 @@
 #no lleva el control de las dependencias 
 node_modules
+debug.log
 
 #si quisieramos que fuera no deterministico 
 #package-lock.json
