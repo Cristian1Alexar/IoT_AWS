@@ -16,13 +16,13 @@ Dependencias:
 - [CSS-Minify](https://www.npmjs.com/package/gulp-cssmin)
 - [WS](https://www.npmjs.com/package/ws)
 - [Aws-iot-device-sdk](https://www.npmjs.com/package/aws-iot-device-sdk)
-- [Sequelize] (https://www.npmjs.com/package/sequelize)
+- [Sequelize](https://www.npmjs.com/package/sequelize)
 
 ```sh
 Instalar dependencias del entorno de desarrollo y ejecutar el cliente 
 $ npm install -d
 $ gulp
-Instalar dependencias y ejecutar la instancia del servidor para el WebSocket y la inseción a la base de datos 
+Instalar dependencias y ejecutar la instancia del servidor para el WebSocket y la inseción a la base de datos, crear la tabla iot y configurar la base de datos local o descomentar la base de datos de AWS 
 $ cd dist/WebSocket
 $ npm install
 $ npm start 
