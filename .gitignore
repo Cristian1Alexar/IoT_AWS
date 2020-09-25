@@ -1,0 +1,5 @@
+#no lleva el control de las dependencias 
+node_modules
+
+#si quisieramos que fuera no deterministico 
+#package-lock.json
