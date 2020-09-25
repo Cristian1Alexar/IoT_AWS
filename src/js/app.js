@@ -1,6 +1,9 @@
 
 //Crear una instancia del WebSocket utilizando la API de Websocket
 var ws = new WebSocket("ws://localhost:8080");
+ws.addEventListener('open', function () {
+    ws.send('Conectado!');
+});
 
 //Requerir elementos mediante el DOM 
 var door = document.getElementById('door');
@@ -39,21 +42,15 @@ ledoff = {
     "angle": 0, 
     "led": 0, 
 }
-var respuesta = {
+respuesta = {
     "message": " "
 }
+var res; 
 
 //Programación de eventos click para enviar las respuestas al websocket 
 door.addEventListener("click", function(){
     door.className = "btn on";
     ws.send(JSON.stringify(opendoor));
-    ws.onmessage = function (event) {
-        console.log(event.data);
-        document.getElementById('doorlabel').innerHTML= "Puerta Abierta";
-        door.className = "btn btn-sucesss btn-lg";
-        setTimeout(function(){ document.getElementById('doorlabel').innerHTML= "Puerta Cerrada";
-        door.className = "btn";}, 5000);
-      } 
 });
 led1.on.addEventListener("click", function(){
     led1.on.className = "btn on";
@@ -86,5 +83,24 @@ led3.off.addEventListener("click", function(){
     led3.off.className = "btn off";
     led3.on.className = "btn btn-secondary";
 })
+ws.onmessage = function (event) {
+    var body = JSON.parse(event.data);
+    if (body.photocell != null)
+    {
+        var value = parseInt(body.photocell) / 59; 
+        document.getElementById('distance').innerHTML = body.photocell
+        value.toPrecision(3);
+        document.getElementById('distance').innerHTML = "Distancia: " + value.toString() + " cm";
+    }
+    if (body.photocell == null)
+    {
+        document.getElementById('doorlabel').innerHTML= "Puerta Abierta";
+        door.className = "btn on";
+        setTimeout(function(){ document.getElementById('doorlabel').innerHTML= "Puerta Cerrada";
+        door.className = "btn";}, 5000);
+    }
+
+    
+  }
 
 
